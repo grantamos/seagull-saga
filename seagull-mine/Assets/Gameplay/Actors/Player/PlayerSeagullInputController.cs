@@ -1,3 +1,4 @@
+using Gameplay.Management;
 using UnityEngine;
 
 namespace Gameplay.Actors.Player
@@ -12,6 +13,16 @@ namespace Gameplay.Actors.Player
         {
             _input = new SeagullInputActionAsset();
             _input.Enable();
+
+            _input.Default.Pause.performed += context =>
+            {
+                GameManager.Instance.Pause();
+            };
+
+            _input.Default.Drop.performed += context =>
+            {
+                seagullController.DropFood();
+            };
         }
 
         public void Update()

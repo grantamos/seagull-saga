@@ -53,6 +53,24 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a119510-5284-4c29-94e2-1f466e5755f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""d231a6ff-53bb-4d7e-95f9-18a2e88c3504"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +128,28 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
                     ""action"": ""Accelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98ec5255-9969-4334-ab2a-fc8201b2eb7b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7821b8b3-ed8f-44fb-9d59-9d50d691eeb1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -121,6 +161,8 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
         m_Default_Accelerate = m_Default.FindAction("Accelerate", throwIfNotFound: true);
         m_Default_Turn = m_Default.FindAction("Turn", throwIfNotFound: true);
         m_Default_Brake = m_Default.FindAction("Brake", throwIfNotFound: true);
+        m_Default_Pause = m_Default.FindAction("Pause", throwIfNotFound: true);
+        m_Default_Drop = m_Default.FindAction("Drop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +225,8 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_Default_Accelerate;
     private readonly InputAction m_Default_Turn;
     private readonly InputAction m_Default_Brake;
+    private readonly InputAction m_Default_Pause;
+    private readonly InputAction m_Default_Drop;
     public struct DefaultActions
     {
         private @SeagullInputActionAsset m_Wrapper;
@@ -190,6 +234,8 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
         public InputAction @Accelerate => m_Wrapper.m_Default_Accelerate;
         public InputAction @Turn => m_Wrapper.m_Default_Turn;
         public InputAction @Brake => m_Wrapper.m_Default_Brake;
+        public InputAction @Pause => m_Wrapper.m_Default_Pause;
+        public InputAction @Drop => m_Wrapper.m_Default_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +254,12 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
                 @Brake.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBrake;
                 @Brake.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBrake;
                 @Brake.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBrake;
+                @Pause.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPause;
+                @Drop.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDrop;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +273,12 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
                 @Brake.started += instance.OnBrake;
                 @Brake.performed += instance.OnBrake;
                 @Brake.canceled += instance.OnBrake;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
             }
         }
     }
@@ -230,5 +288,7 @@ public partial class @SeagullInputActionAsset : IInputActionCollection2, IDispos
         void OnAccelerate(InputAction.CallbackContext context);
         void OnTurn(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
 }

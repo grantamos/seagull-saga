@@ -18,6 +18,10 @@ namespace Gameplay.Actors.Player
         {
             var newPosition = transform.position;
             var velocity = newPosition - _lastPosition;
+            if (velocity.magnitude < 0.001)
+            {
+                velocity = transform.parent.forward;
+            }
             
             // Calculates the angle from up.
             var angle = Vector3.Angle(Vector3.up, velocity);
@@ -31,7 +35,7 @@ namespace Gameplay.Actors.Player
             var up = Vector3.Lerp(Vector3.up, Math.Sign(angle) * Vector3.forward, Math.Abs(angle) / 90f);
             
             transform.LookAt(transform.position + velocity, up);
-            
+
             _lastPosition = transform.position;
         }
     }
