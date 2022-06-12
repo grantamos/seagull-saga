@@ -1,5 +1,7 @@
 using System;
+using UI.Gameplay;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 namespace Gameplay.Actors.Humans
@@ -11,35 +13,58 @@ namespace Gameplay.Actors.Humans
         [SerializeField] private HumanState state = HumanState.HANGING_OUT;
         [SerializeField] private HumanSettings settings;
         [SerializeField] private GameObject fishPrefab;
+        
+        [SerializeField] private GameObject hangingOut;
+        [SerializeField] private GameObject goingFishing;
+        [SerializeField] private GameObject fishing;
+        [SerializeField] private GameObject reeling;
+        [SerializeField] private GameObject celebrating;
 
-        private GameObject _fishingLine;
         private float _timeInState = 0f;
         private GameObject _fishInstance;
 
+        public HumanState State => state;
+
         private void Awake()
         {
-            _fishingLine = transform.Find("fishing-pole/FishingLine").gameObject;
-            _fishingLine.SetActive(false);
-
             switch (state)
             {
                 case HumanState.HANGING_OUT:
                     transform.position = beachChair.transform.position;
+                    ShowModel(hangingOut);
                     break;
                 case HumanState.GOING_FISHING:
+                    ShowModel(goingFishing);
                     break;
                 case HumanState.FISHING:
+                    ShowModel(fishing);
                     transform.position = FishingPosition();
                     break;
                 case HumanState.REELING_IT_IN:
+                    ShowModel(reeling);
                     break;
                 case HumanState.CELEBRATING_CATCH:
+                    ShowModel(celebrating);
                     break;
                 case HumanState.GIVEN_UP:
+                    ShowModel(goingFishing);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            EventPointer.Instance.AddTarget(this);
+        }
+
+        private void ShowModel(GameObject toShow)
+        {
+            hangingOut.SetActive(false);
+            goingFishing.SetActive(false);
+            celebrating.SetActive(false);
+            fishing.SetActive(false);
+            reeling.SetActive(false);
+            
+            toShow.SetActive(true);
         }
 
         private void Update()
@@ -82,7 +107,7 @@ namespace Gameplay.Actors.Humans
             }
             else
             {
-                // TODO - Lay down.
+                ShowModel(hangingOut);
             }
         }
 
@@ -106,7 +131,7 @@ namespace Gameplay.Actors.Humans
             else
             {
                 ChangeState(HumanState.FISHING);
-                _fishingLine.SetActive(true);
+                ShowModel(fishing);
             }
         }
 
@@ -115,8 +140,6 @@ namespace Gameplay.Actors.Humans
             if (_timeInState > settings.celebrationTime)
             {
                 ChangeState(HumanState.FISHING);
-                // Show the fishing line!
-                _fishingLine.SetActive(true);
                 // Look towards the ocean.
                 transform.LookAt(transform.position + Vector3.forward);
                 Destroy(_fishInstance);
@@ -125,7 +148,7 @@ namespace Gameplay.Actors.Humans
             if (_fishInstance.IsDestroyed())
             {
                 ChangeState(HumanState.GIVEN_UP);
-                Destroy(transform.Find("fishing-pole").gameObject);
+                ShowModel(goingFishing);
             }
         }
 
@@ -135,7 +158,7 @@ namespace Gameplay.Actors.Humans
             {
                 ChangeState(HumanState.CELEBRATING_CATCH);
                 _fishInstance = Instantiate(fishPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
-                _fishingLine.SetActive(false);
+                ShowModel(celebrating);
             }
         }
 
@@ -144,6 +167,7 @@ namespace Gameplay.Actors.Humans
             if (_timeInState > settings.fishingTime)
             {
                 ChangeState(HumanState.REELING_IT_IN);
+                ShowModel(reeling);
             }
         }
 
@@ -152,6 +176,7 @@ namespace Gameplay.Actors.Humans
             if (_timeInState > settings.hangTime)
             {
                 ChangeState(HumanState.GOING_FISHING);
+                ShowModel(goingFishing);
             }
         }
 
@@ -186,6 +211,13 @@ namespace Gameplay.Actors.Humans
             REELING_IT_IN,
             CELEBRATING_CATCH,
             GIVEN_UP,
+        }
+
+        public void Reset()
+        {
+            transform.position = beachChair.transform.position;
+            ShowModel(hangingOut);
+            ChangeState(HumanState.HANGING_OUT);
         }
     }
 }

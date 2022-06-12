@@ -241,6 +241,75 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1001 &812772187
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8630375288749889338, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_Name
+      value: Sea Noise
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.47414
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.82312274
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630375288749889340, guid: 3b2cdc6f6f547714384dc631b026d87c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b2cdc6f6f547714384dc631b026d87c, type: 3}
 --- !u!1001 &850697846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -647,7 +716,7 @@ PrefabInstance:
     - target: {fileID: 8200022491866456850, guid: 25bd00be8624c0341b1afd328f6b1900,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8200022491866456850, guid: 25bd00be8624c0341b1afd328f6b1900,
         type: 3}
@@ -714,25 +783,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8200022492837190079, guid: 25bd00be8624c0341b1afd328f6b1900,
+        type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8200022492842740650, guid: 25bd00be8624c0341b1afd328f6b1900,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8200022492842740650, guid: 25bd00be8624c0341b1afd328f6b1900,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8200022492842740650, guid: 25bd00be8624c0341b1afd328f6b1900,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500.00006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8200022492842740650, guid: 25bd00be8624c0341b1afd328f6b1900,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250.00003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25bd00be8624c0341b1afd328f6b1900, type: 3}

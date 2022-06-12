@@ -1,5 +1,6 @@
 using System;
 using Gameplay.Actors.HomeBase;
+using Gameplay.Management;
 using UnityEngine;
 
 namespace Gameplay.Actors.Food
@@ -13,9 +14,17 @@ namespace Gameplay.Actors.Food
         private Vector3 _lastPosition;
         private Vector3 _velocity;
         private bool _dropped = false;
+        private bool _hasBeenDropped;
+        private float _timeSittingStill = 0f;
+        private float _timeUntilReset = 5f;
+        private bool _isDead;
 
         public void Update()
         {
+            if (_isDead)
+            {
+                return;
+            }
             if (_dropped)
             {
                 var move = _velocity + Vector3.down * 9.8f;
@@ -26,6 +35,26 @@ namespace Gameplay.Actors.Food
                 _velocity = (transform.position - _lastPosition) / Time.deltaTime;
                 _lastPosition = transform.position;
             }
+
+            if (IsDead())
+            {
+                GameManager.Instance.ResetAHuman();
+                _isDead = true;
+            }
+        }
+
+        public bool IsDead()
+        {
+            if (_rigidbody.velocity.magnitude < 0.01f)
+            {
+                _timeSittingStill += Time.deltaTime;
+            }
+            else
+            {
+                _timeSittingStill = 0;
+            }
+
+            return _timeSittingStill > _timeUntilReset;
         }
 
         public void Drop()
@@ -33,10 +62,14 @@ namespace Gameplay.Actors.Food
             transform.parent = null;
             _rigidbody.isKinematic = false;
             _rigidbody.AddForce(_velocity, ForceMode.VelocityChange);
+            _hasBeenDropped = true;
         }
 
         public void OnTriggerEnter(Collider other)
         {
+            if (!_hasBeenDropped)
+                return;
+            
             var babySeagulls = other.GetComponent<BabySeagulls>();
             if (babySeagulls != null)
             {
