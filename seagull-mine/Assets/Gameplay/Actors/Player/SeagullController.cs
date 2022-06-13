@@ -168,7 +168,7 @@ namespace Gameplay.Actors.Player
             if (_isCarryingFish)
             {
                 DroppableFood food = _fishInstance.GetComponent<DroppableFood>();
-                food.Drop();
+                food.Drop(transform.forward * _speed);
                 CreateFish();
                 _isCarryingFish = false;
             }

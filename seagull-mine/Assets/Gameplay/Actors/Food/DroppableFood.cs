@@ -12,7 +12,6 @@ namespace Gameplay.Actors.Food
         private Rigidbody _rigidbody;
 
         private Vector3 _lastPosition;
-        private Vector3 _velocity;
         private bool _dropped = false;
         private bool _hasBeenDropped;
         private float _timeSittingStill = 0f;
@@ -24,16 +23,6 @@ namespace Gameplay.Actors.Food
             if (_isDead)
             {
                 return;
-            }
-            if (_dropped)
-            {
-                var move = _velocity + Vector3.down * 9.8f;
-                transform.Translate(move * Time.deltaTime);
-            }
-            else
-            {
-                _velocity = (transform.position - _lastPosition) / Time.deltaTime;
-                _lastPosition = transform.position;
             }
 
             if (IsDead())
@@ -57,16 +46,17 @@ namespace Gameplay.Actors.Food
             return _timeSittingStill > _timeUntilReset;
         }
 
-        public void Drop()
+        public void Drop(Vector3 velocity)
         {
             transform.parent = null;
             _rigidbody.isKinematic = false;
-            _rigidbody.AddForce(_velocity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(velocity, ForceMode.VelocityChange);
             _hasBeenDropped = true;
         }
 
         public void OnTriggerEnter(Collider other)
         {
+            Debug.Log("TRIGGER" + Time.time);
             if (!_hasBeenDropped)
                 return;
             
@@ -76,6 +66,11 @@ namespace Gameplay.Actors.Food
                 babySeagulls.Feed();
                 Destroy(gameObject);
             }
+        }
+
+        public void OnCollisionEnter(Collision other)
+        {
+            Debug.Log("COLLISION" + Time.time);
         }
     }
 }

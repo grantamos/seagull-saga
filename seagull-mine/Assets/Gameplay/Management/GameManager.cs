@@ -46,11 +46,11 @@ namespace Gameplay.Management
 
             _humans = FindObjectsOfType<HumanController>();
 
-            var currentScene = SceneManager.GetActiveScene().name;
+            var currentScene = SceneManager.GetActiveScene().path;
             for (var i = 0; i < levels.Length; i++)
             {
                 var level = levels[i];
-                if (level != currentScene) continue;
+                if (!currentScene.Contains(level)) continue;
                 _currentLevel = i;
             }
 
