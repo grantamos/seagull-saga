@@ -46,7 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: Scenes/MainMenu
   levels:
-  - {fileID: 11400000, guid: 30eb46497191e834399e3d726a2d4345, type: 2}
+  - Scenes/Level1
+  - Scenes/Level2
+  - Scenes/Level3
+  - Scenes/Level4
+  - Scenes/Level5
   pauseMenuPrefab: {fileID: 2037920225408977763, guid: 105d9ab6ef244a5458fdae4d2858712f,
     type: 3}
   winScreenPrefab: {fileID: 3117412643276012882, guid: a56045c275aa74b44b3474b86fe8f59b,

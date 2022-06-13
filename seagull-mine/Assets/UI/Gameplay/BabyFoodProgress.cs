@@ -14,6 +14,11 @@ namespace UI.Gameplay
 
         public void Awake()
         {
+            if (babySeagulls == null)
+            {
+                babySeagulls = FindObjectOfType<BabySeagulls>();
+            }
+            
             _hungryBabiesCount = GameManager.Instance.HungryBabies;
             for (int i = 0; i < babySeagulls.babies; i++)
             {

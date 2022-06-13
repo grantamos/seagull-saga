@@ -142,6 +142,7 @@ namespace Gameplay.Actors.Humans
                 // Look towards the ocean.
                 transform.LookAt(transform.position + Vector3.forward);
                 Destroy(_fishInstance);
+                ShowModel(fishing);
             }
 
             if (_fishInstance.IsDestroyed())

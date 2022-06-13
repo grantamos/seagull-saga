@@ -28240,6 +28240,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6955074964158941853, guid: 44e3b4bdde3e03a4996f7b2910543f45,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955074964158941853, guid: 44e3b4bdde3e03a4996f7b2910543f45,
+        type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -28281,6 +28286,11 @@ PrefabInstance:
     - target: {fileID: 6955074964601464241, guid: 44e3b4bdde3e03a4996f7b2910543f45,
         type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955074964601464241, guid: 44e3b4bdde3e03a4996f7b2910543f45,
+        type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6955074964601464241, guid: 44e3b4bdde3e03a4996f7b2910543f45,
@@ -60468,7 +60478,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 500, y: 1, z: 20}
-  m_Center: {x: 0, y: 15, z: 0}
+  m_Center: {x: 0, y: 20, z: 0}
 --- !u!65 &1581082994
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83725,31 +83735,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930248567231207087, guid: 4960e6f115483c24485784d906f194ce,
-        type: 3}
-      propertyPath: levels.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930248567231207087, guid: 4960e6f115483c24485784d906f194ce,
-        type: 3}
-      propertyPath: levels.Array.data[0]
-      value: Scenes/Level1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930248567231207087, guid: 4960e6f115483c24485784d906f194ce,
-        type: 3}
-      propertyPath: levels.Array.data[1]
-      value: Scenes/Level2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930248567231207087, guid: 4960e6f115483c24485784d906f194ce,
-        type: 3}
-      propertyPath: levels.Array.data[2]
-      value: Scenes/Level3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930248567231207087, guid: 4960e6f115483c24485784d906f194ce,
-        type: 3}
-      propertyPath: levels.Array.data[3]
-      value: Scenes/Level4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4960e6f115483c24485784d906f194ce, type: 3}
