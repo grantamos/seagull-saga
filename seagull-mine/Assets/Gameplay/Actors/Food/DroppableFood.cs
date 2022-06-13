@@ -20,7 +20,7 @@ namespace Gameplay.Actors.Food
 
         public void Update()
         {
-            if (_isDead)
+            if (_isDead || !_hasBeenDropped)
             {
                 return;
             }
@@ -56,7 +56,6 @@ namespace Gameplay.Actors.Food
 
         public void OnTriggerEnter(Collider other)
         {
-            Debug.Log("TRIGGER" + Time.time);
             if (!_hasBeenDropped)
                 return;
             
@@ -66,11 +65,6 @@ namespace Gameplay.Actors.Food
                 babySeagulls.Feed();
                 Destroy(gameObject);
             }
-        }
-
-        public void OnCollisionEnter(Collision other)
-        {
-            Debug.Log("COLLISION" + Time.time);
         }
     }
 }
