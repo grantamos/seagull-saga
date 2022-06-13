@@ -9,5 +9,10 @@ namespace UI.Menus.Main
         {
             GameManager.Instance.LoadLevel(0);
         }
+
+        public void Quit()
+        {
+            GameManager.Instance.Quit();
+        }
     }
 }

@@ -14,5 +14,10 @@ namespace UI.Menus.Pause
         {
             GameManager.Instance.Quit();
         }
+
+        public void OnRetry()
+        {
+            GameManager.Instance.ReloadCurrentLevel();
+        }
     }
 }

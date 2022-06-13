@@ -53,7 +53,7 @@
             ],
             "bindings": [
                 {
-                    "name": "Keyboard",
+                    "name": "WASD",
                     "id": "8f01a499-f68e-4e3b-9d62-28d30483b847",
                     "path": "1DAxis",
                     "interactions": "",
@@ -86,6 +86,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Arrows",
+                    "id": "c6c93fb4-5717-4e10-8b03-e68ab9c18c71",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "6c471003-8ce1-42c5-a917-fdf540bee9bf",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "2a8799c3-ef05-4846-b8dd-e2f8d92abb51",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "13bb4f8f-a0ce-411a-9964-bcbef63998a6",
                     "path": "<Keyboard>/s",
@@ -98,8 +131,30 @@
                 },
                 {
                     "name": "",
+                    "id": "24754caa-e0e1-4246-bc08-cd59ac3500c0",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ebdb5a14-6505-4819-8baf-838e3bff8043",
                     "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85b8917a-7c36-43b1-966b-19d9da3e7f3c",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

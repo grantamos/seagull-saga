@@ -1,7 +1,6 @@
 using System;
 using UI.Gameplay;
 using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 namespace Gameplay.Actors.Humans

@@ -25,11 +25,11 @@ namespace Gameplay.Actors.Player
         private float _speed = 0f;
         private bool _isAccelerating = false;
         private Plane _ceilingPlane;
+        private float _nextTurnAmount;
 
         public void Awake()
         {
-            _speed = 0f;
-            transform.LookAt(transform.position + Vector3.right, -Vector3.forward);
+            _speed = maxSpeed;
             _ceilingPlane = new Plane(Vector3.up, Vector3.up * maxHeight);
             CreateFish();
         }
@@ -43,7 +43,7 @@ namespace Gameplay.Actors.Player
 
         public void Turn(float turnAmount)
         {
-            transform.RotateAround(transform.position, transform.up, turnAmount * turnSpeed * Time.deltaTime);
+            _nextTurnAmount = turnAmount;
         }
 
         public void Accelerate(float accelerateAmount)
@@ -99,6 +99,7 @@ namespace Gameplay.Actors.Player
 
             var movementThisFrame = movement * Time.deltaTime;
 
+            int steerDirection = 0;
             RaycastHit hit;
             if (Physics.Raycast(transform.position, movement, out hit, movement.magnitude / 2,
                 LayerMask.GetMask("Bounds")))
@@ -110,12 +111,12 @@ namespace Gameplay.Actors.Player
                 if (movementThisFrame.magnitude >= distance)
                 {
                     transform.RotateAround(transform.position, transform.up, angle);
-                    transform.Translate(
-                        Vector3.Max(Vector3.Project(movementThisFrame, hit.normal) * -1.5f, hit.normal * .01f),
-                        Space.World);
+                    movementThisFrame += Vector3.Max(Vector3.Project(movementThisFrame, hit.normal) * -1.5f,
+                        hit.normal * .01f);
                 }
                 else
                 {
+                    steerDirection = Math.Sign(angle);
                     transform.RotateAround(transform.position, transform.up,
                         (angle / timeUntilCollision) * Time.deltaTime);
                 }
@@ -123,6 +124,9 @@ namespace Gameplay.Actors.Player
 
             // Translate along the forward axis by speed.
             transform.Translate(movementThisFrame, Space.World);
+            
+            if (steerDirection == 0 || steerDirection == Math.Sign(_nextTurnAmount))
+                transform.RotateAround(transform.position, transform.up, _nextTurnAmount * turnSpeed * Time.deltaTime);
         }
 
         public void OnTriggerEnter(Collider other)
@@ -155,6 +159,7 @@ namespace Gameplay.Actors.Player
             {
                 CreateFish();
             }
+
             _fishInstance.SetActive(true);
         }
 

@@ -1,7 +1,5 @@
 using System.Collections;
 using Gameplay.Actors.Humans;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,8 +22,8 @@ namespace Gameplay.Management
             }
         }
 
-        public SceneAsset mainMenu;
-        public Level[] levels;
+        public string mainMenu;
+        public string[] levels;
         public GameObject pauseMenuPrefab;
         private GameObject _pauseMenuInstance;
 
@@ -36,6 +34,8 @@ namespace Gameplay.Management
         private bool _isPaused;
         private int _hungryBabies;
         private int _currentLevel;
+
+        public int HungryBabies => _hungryBabies;
 
         private void Awake()
         {
@@ -50,7 +50,7 @@ namespace Gameplay.Management
             for (var i = 0; i < levels.Length; i++)
             {
                 var level = levels[i];
-                if (level.scene.name != currentScene) continue;
+                if (level != currentScene) continue;
                 _currentLevel = i;
             }
 
@@ -97,17 +97,17 @@ namespace Gameplay.Management
 
         public void LoadMenu()
         {
-            SceneManager.LoadScene(mainMenu.name);
+            SceneManager.LoadScene(mainMenu);
         }
 
         public bool HasNextLevel()
         {
-            return _currentLevel - 1 >= levels.Length;
+            return _currentLevel < levels.Length - 1;
         }
 
         public void NextLevel()
         {
-            LoadLevel(_currentLevel++);
+            LoadLevel(_currentLevel + 1);
         }
 
         public void ReloadCurrentLevel(float delay)
@@ -134,7 +134,7 @@ namespace Gameplay.Management
                 return;
             }
 
-            SceneManager.LoadScene(levels[i].scene.name);
+            SceneManager.LoadScene(levels[i]);
             Time.timeScale = 1f;
         }
 
@@ -142,6 +142,8 @@ namespace Gameplay.Management
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBGL
+            LoadMenu();
 #else
             Application.Quit();
 #endif
