@@ -14,5 +14,10 @@ namespace UI.Menus.Main
         {
             GameManager.Instance.Quit();
         }
+
+        public void PlayAgain()
+        {
+            GameManager.Instance.LoadLevel(0);
+        }
     }
 }

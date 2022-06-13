@@ -33,7 +33,7 @@ namespace Gameplay.Management
 
         private bool _isPaused;
         private int _hungryBabies;
-        private int _currentLevel;
+        private int _currentLevel = -1;
 
         public int HungryBabies => _hungryBabies;
 
@@ -45,7 +45,16 @@ namespace Gameplay.Management
             _winScreenInstance.SetActive(false);
 
             _humans = FindObjectsOfType<HumanController>();
+            UpdateCurrentLevel();
 
+            Time.timeScale = 1f;
+        }
+
+        public void UpdateCurrentLevel()
+        {
+            if (_currentLevel != -1)
+                return;
+            
             var currentScene = SceneManager.GetActiveScene().path;
             for (var i = 0; i < levels.Length; i++)
             {
@@ -53,8 +62,6 @@ namespace Gameplay.Management
                 if (!currentScene.Contains(level)) continue;
                 _currentLevel = i;
             }
-
-            Time.timeScale = 1f;
         }
 
         public void Pause()
@@ -102,6 +109,7 @@ namespace Gameplay.Management
 
         public bool HasNextLevel()
         {
+            UpdateCurrentLevel();
             return _currentLevel < levels.Length - 1;
         }
 
@@ -166,7 +174,15 @@ namespace Gameplay.Management
         public void ShowWinScreen()
         {
             Time.timeScale = 0f;
-            _winScreenInstance.SetActive(true);
+
+            if (!HasNextLevel())
+            {
+                SceneManager.LoadScene("Scenes/WinScene");
+            }
+            else
+            {
+                _winScreenInstance.SetActive(true);
+            }
         }
     }
 }
